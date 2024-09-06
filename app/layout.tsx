@@ -14,7 +14,7 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Create  App',
+  title: 'Project Gutenberg Explorer',
 }
 
 export default function RootLayout({
