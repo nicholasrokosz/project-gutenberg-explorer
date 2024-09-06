@@ -13,24 +13,28 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { fetchBook } from './actions'
+import { fetchBook, saveBook } from './actions'
 import { useState } from 'react'
 import { ObjectPrinter } from '@/components/object-printer'
+import { Save } from 'lucide-react'
 
 const formSchema = z.object({
   bookID: z.string().min(2).max(50),
 })
 
 export default function BookForm() {
+  const [metadata, setMetadata] = useState()
+  const [content, setContent] = useState('')
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   })
 
   async function onSubmit({ bookID }: z.infer<typeof formSchema>) {
-    const metadata = await fetchBook(bookID)
+    const { metadata, content } = await fetchBook(bookID)
     setMetadata(metadata)
+    setContent(content)
   }
-  const [metadata, setMetadata] = useState()
 
   return (
     <div className="flex gap-4 items-center flex-col">
@@ -56,8 +60,17 @@ export default function BookForm() {
         </form>
       </Form>
       {metadata && (
-        <div>
-          <h2>Metadata:</h2>
+        <div className="flex flex-col gap-4">
+          <div className="flex gap-2 items-center">
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => saveBook({ content, metadata })}
+            >
+              <Save className="h-4 w-4" />
+            </Button>
+            <h2 className="text-4xl font-bold">Metadata:</h2>
+          </div>
           <ObjectPrinter data={metadata} />
         </div>
       )}
