@@ -1,6 +1,8 @@
+import { Button } from '@/components/ui/button'
 import BookForm from './form'
 import { createClient } from '@/utils/supabase/server'
 import { cookies } from 'next/headers'
+import Link from 'next/link'
 
 export default async function Home() {
   const cookieStore = cookies()
@@ -10,6 +12,9 @@ export default async function Home() {
 
   return (
     <main>
+      <Link href="/saved" prefetch={true}>
+        <Button variant="link">Saved books</Button>
+      </Link>
       <BookForm />
     </main>
   )
