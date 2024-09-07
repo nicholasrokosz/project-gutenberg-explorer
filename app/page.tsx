@@ -12,7 +12,7 @@ export default async function Home() {
 
   return (
     <main className="h-full">
-      <Link href="/saved" prefetch={true}>
+      <Link href="/saved">
         <Button variant="link">Saved books</Button>
       </Link>
       <BookForm />
