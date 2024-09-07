@@ -17,6 +17,7 @@ import { fetchBook, saveBook } from './actions'
 import { useState } from 'react'
 import { ObjectPrinter } from '@/components/object-printer'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { toast } from 'sonner'
 
 const formSchema = z.object({
   bookID: z.string(),
@@ -34,6 +35,11 @@ export default function BookForm() {
     const { metadata, content } = await fetchBook(bookID)
     setMetadata(metadata)
     setContent(content)
+  }
+
+  async function onSave() {
+    await saveBook({ content, metadata })
+    toast.success(`Book ${form.getValues('bookID')} saved!`)
   }
 
   return (
@@ -58,10 +64,7 @@ export default function BookForm() {
           />
           <Button type="submit">Submit</Button>
           {metadata && (
-            <Button
-              variant="secondary"
-              onClick={() => saveBook({ content, metadata })}
-            >
+            <Button variant="secondary" onClick={onSave}>
               Save
             </Button>
           )}
