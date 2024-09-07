@@ -16,7 +16,7 @@ export default async function SavedPage() {
       <Link href="/" prefetch={true}>
         <Button variant="link">Home</Button>
       </Link>
-      <div className="container mx-auto py-10">
+      <div className="container mx-auto py-10 max-w-4xl">
         <DataTable columns={columns} data={books} />
       </div>
     </>

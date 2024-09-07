@@ -11,7 +11,7 @@ export default async function Home() {
   console.log(todos)
 
   return (
-    <main>
+    <main className="h-full">
       <Link href="/saved" prefetch={true}>
         <Button variant="link">Saved books</Button>
       </Link>

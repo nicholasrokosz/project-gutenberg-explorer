@@ -26,7 +26,7 @@ export const saveBook = async ({
 }: {
   content: string
   metadata: {
-    [key: string]: string | number | Array<any> | { [key: string]: string } // TODO: fix type
+    [key: string]: string | number | Array<any> | { [key: string]: string } // TODO: write proper type
   }
 }) => {
   const cookieStore = cookies()
@@ -35,7 +35,7 @@ export const saveBook = async ({
   const { title, id: book_id, authors } = metadata
   const author = authors[0].name as string
 
-  const { data, error } = await supabase
+  await supabase
     .from('books')
     .upsert({
       book_id,

@@ -17,6 +17,8 @@ import { fetchBook, saveBook } from './actions'
 import { useState } from 'react'
 import { ObjectPrinter } from '@/components/object-printer'
 import { Save } from 'lucide-react'
+import { ScrollableText } from '@/components/scrollable-text'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 const formSchema = z.object({
   bookID: z.string().min(2).max(50),
@@ -37,11 +39,11 @@ export default function BookForm() {
   }
 
   return (
-    <div className="flex gap-4 items-center flex-col">
+    <div className="flex gap-4 items-center flex-col px-8">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 flex gap-2"
+          className="space-y-8 flex gap-2 items-end"
         >
           <FormField
             control={form.control}
@@ -57,21 +59,30 @@ export default function BookForm() {
             )}
           />
           <Button type="submit">Submit</Button>
+          {metadata && (
+            <Button
+              variant="secondary"
+              onClick={() => saveBook({ content, metadata })}
+            >
+              Save
+            </Button>
+          )}
         </form>
       </Form>
       {metadata && (
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-2 items-center">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => saveBook({ content, metadata })}
-            >
-              <Save className="h-4 w-4" />
-            </Button>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="flex flex-col gap-4">
             <h2 className="text-4xl font-bold">Metadata:</h2>
+            <ScrollArea className="h-[600px] rounded-md border p-4">
+              <ObjectPrinter data={metadata} />
+            </ScrollArea>
           </div>
-          <ObjectPrinter data={metadata} />
+          <div className="flex flex-col gap-4">
+            <h2 className="text-4xl font-bold">Content:</h2>
+            <ScrollArea className="h-[600px] rounded-md border p-4">
+              {content}
+            </ScrollArea>
+          </div>
         </div>
       )}
     </div>
