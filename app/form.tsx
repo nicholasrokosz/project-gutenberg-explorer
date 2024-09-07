@@ -19,7 +19,7 @@ import { ObjectPrinter } from '@/components/object-printer'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 const formSchema = z.object({
-  bookID: z.string().min(2).max(50),
+  bookID: z.string(),
 })
 
 export default function BookForm() {
