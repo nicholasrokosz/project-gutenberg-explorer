@@ -5,7 +5,6 @@ import { cookies } from 'next/headers'
 
 export const fetchBook = async (bookID: string) => {
   const contentURL = `https://www.gutenberg.org/files/${bookID}/${bookID}-0.txt`
-  // const metadataURL = `https://www.gutenberg.org/ebooks/${bookID}`
   const metadataURL = `https://gutendex.com/books/${bookID}`
 
   const contentResponse = await fetch(contentURL)
@@ -31,20 +30,17 @@ export const saveBook = async ({
   metadata,
 }: {
   content: string
-  metadata: {
-    [key: string]:
-      | string
-      | number
-      | Array<string | number | { [key: string]: string | null | number }>
-      | { [key: string]: string } // TODO: write proper type
-  }
+  metadata: unknown
 }) => {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
 
-  const { title, id: book_id, authors } = metadata
-  const authorObj = (authors as AuthorObj[])[0]
-  const author = authorObj.name
+  const {
+    title,
+    id: book_id,
+    authors,
+  } = metadata as { title: string; id: string; authors: AuthorObj[] }
+  const author = authors[0].name
 
   await supabase
     .from('books')
