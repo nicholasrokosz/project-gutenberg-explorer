@@ -16,8 +16,6 @@ import { Input } from '@/components/ui/input'
 import { fetchBook, saveBook } from './actions'
 import { useState } from 'react'
 import { ObjectPrinter } from '@/components/object-printer'
-import { Save } from 'lucide-react'
-import { ScrollableText } from '@/components/scrollable-text'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 const formSchema = z.object({

@@ -20,12 +20,19 @@ export const fetchBook = async (bookID: string) => {
   return { metadata, content }
 }
 
+type AuthorObj = {
+  name: string
+  birth_year: string
+  death_year: string
+}
+
 export const saveBook = async ({
   content,
   metadata,
 }: {
   content: string
   metadata: {
+    // eslint-disable-next-line
     [key: string]: string | number | Array<any> | { [key: string]: string } // TODO: write proper type
   }
 }) => {
@@ -33,7 +40,8 @@ export const saveBook = async ({
   const supabase = createClient(cookieStore)
 
   const { title, id: book_id, authors } = metadata
-  const author = authors[0].name as string
+  const authorObj = (authors as AuthorObj[])[0]
+  const author = authorObj.name
 
   await supabase
     .from('books')
