@@ -32,8 +32,11 @@ export const saveBook = async ({
 }: {
   content: string
   metadata: {
-    // eslint-disable-next-line
-    [key: string]: string | number | Array<any> | { [key: string]: string } // TODO: write proper type
+    [key: string]:
+      | string
+      | number
+      | Array<string | number | { [key: string]: string | null | number }>
+      | { [key: string]: string } // TODO: write proper type
   }
 }) => {
   const cookieStore = cookies()
