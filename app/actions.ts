@@ -7,14 +7,15 @@ export const fetchBook = async (bookID: string) => {
   const contentURL = `https://www.gutenberg.org/files/${bookID}/${bookID}-0.txt`
   const metadataURL = `https://gutendex.com/books/${bookID}`
 
-  const contentResponse = await fetch(contentURL)
-  const content = await contentResponse.text()
+  const [contentResponse, metadataResponse] = await Promise.all([
+    fetch(contentURL),
+    fetch(metadataURL),
+  ])
 
-  const metadataResponse = await fetch(metadataURL)
-  const metadata = await metadataResponse.json()
-
-  // console.log(content)
-  // console.log(metadata)
+  const [content, metadata] = await Promise.all([
+    contentResponse.text(),
+    metadataResponse.json(),
+  ])
 
   return { metadata, content }
 }
