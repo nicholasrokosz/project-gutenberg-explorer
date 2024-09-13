@@ -22,8 +22,8 @@ export const fetchBook = async (bookID: string) => {
 
 interface AuthorObj {
   name: string
-  birth_year: string
-  death_year: string
+  birthYear: string
+  deathYear: string
 }
 
 export const saveBook = async ({

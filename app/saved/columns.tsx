@@ -3,7 +3,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 
 export type BookRow = {
-  book_id: string
+  bookID: string
   title: string
   author: string
 }
