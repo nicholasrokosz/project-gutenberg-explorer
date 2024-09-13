@@ -9,7 +9,13 @@ export default async function SavedPage() {
   const cookieStore = cookies()
   const supabase = createClient(cookieStore)
   const { data } = await supabase.from('books').select('book_id, title, author')
-  const books = data as BookRow[]
+  const books = data
+    ? (data.map(({ book_id, title, author }) => ({
+        title,
+        author,
+        bookID: book_id,
+      })) as BookRow[])
+    : []
 
   return (
     <>

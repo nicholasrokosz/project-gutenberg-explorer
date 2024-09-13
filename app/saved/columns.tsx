@@ -10,7 +10,7 @@ export type BookRow = {
 
 export const columns: ColumnDef<BookRow>[] = [
   {
-    accessorKey: 'book_id',
+    accessorKey: 'bookID',
     header: 'id',
   },
   {
