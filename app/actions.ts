@@ -20,7 +20,7 @@ export const fetchBook = async (bookID: string) => {
   return { metadata, content }
 }
 
-type AuthorObj = {
+interface AuthorObj {
   name: string
   birth_year: string
   death_year: string
