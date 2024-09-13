@@ -88,33 +88,3 @@ export function ObjectPrinter({ data, level = 0 }: ObjectPrinterProps) {
     </div>
   )
 }
-
-// Example usage
-function ExampleUsage() {
-  const exampleObject = {
-    name: 'John Doe',
-    age: 30,
-    isStudent: false,
-    hobbies: ['reading', 'swimming', 'coding'],
-    address: {
-      street: '123 Main St',
-      city: 'Anytown',
-      country: 'USA',
-    },
-    grades: {
-      math: 95,
-      science: 88,
-      history: null,
-    },
-  }
-
-  return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Object Printer Example</h1>
-      <ObjectPrinter data={exampleObject} />
-    </div>
-  )
-}
-
-export { ExampleUsage as Component }
-
